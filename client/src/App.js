@@ -66,7 +66,7 @@ class App extends Component {
           </p>
           <button className="theButton" type="submit">Calculate</button>
           <div className="githubLink">
-            <a href="https://github.com/aaronstearns">Github</a>
+            <a href="https://github.com/AaronStearns/Bowling-Ball">Github</a>
           </div>
         </form>
         </div>
