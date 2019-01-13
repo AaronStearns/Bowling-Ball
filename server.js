@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 let knn = new kNN();
 
+// ML library:
 // https://github.com/proin/nodeml
 
 // Training data for kNN model

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './App.css';
 
 class App extends Component {
@@ -66,12 +65,16 @@ class App extends Component {
             <label for="Advanced">Advanced</label><br />
           </p>
           <button className="theButton" type="submit">Calculate</button>
+          <div className="githubLink">
+            <a href="https://github.com/aaronstearns">Github</a>
+          </div>
         </form>
         </div>
         <div className="responseWeight">
           <p>{this.state.responseToPost}</p>
         </div>
       </div>
+              
     );
   }
 }
