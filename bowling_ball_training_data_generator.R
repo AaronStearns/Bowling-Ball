@@ -7,6 +7,8 @@ library(DMwR)
 # Library to convert dataframes to json
 library(rjson)
 
+library(ggplot2)
+
 #######################################################
 # CREATE TRAINING DATA FOR REACT APP ##################
 #######################################################
@@ -14,6 +16,18 @@ library(rjson)
 # Generate 500 bodyweights with a mean of 
 # 150 and a standard deviation of 30
 bodyweight <- floor(rnorm(500, mean = 150, sd = 30))
+
+bodyweight %>% 
+  as.data.frame() %>% 
+  ggplot(aes(x = bodyweight)) + 
+  geom_histogram(fill = "orange", 
+                 color = "black", 
+                 bins = 50,
+                 alpha = .85) +
+  theme_minimal() +
+  ggtitle("Histogram of Bodyweights") +
+  xlab("Bodyweight") +
+  ylab("Frequency")
 
 # Generate 500 experiene levels from 1:3
 experience <- sample(1:3, 500, replace=TRUE)
@@ -29,8 +43,10 @@ rawWeights <- data %>%
   select(ballWeight) %>% 
   unlist()
 
-# Using case_when instead of if...else to set max and min ball weights 
-ballWeight <- case_when(rawWeights > 16 ~ 16, rawWeights < 6 ~ 6, TRUE ~ rawWeights)
+# Setting max and min ball weights 
+ballWeight <- case_when(rawWeights > 16 ~ 16, 
+                        rawWeights < 6 ~ 6, 
+                        TRUE ~ rawWeights)
 
 # Adding refined ball weights to dataframe
 data <- cbind(data, ballWeight)
@@ -48,6 +64,7 @@ knnModel <- kNN(ballWeight ~ .,
 bowlJSON <- toJSON(
   unname(
     split(
-      data, 1:nrow(data))))
+      data, 
+      1:nrow(data))))
 
 write(bowlJSON, file="bowling.JSON")
